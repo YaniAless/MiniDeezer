@@ -1,0 +1,2 @@
+rootProject.name='MiniDeezer'
+include ':app'
