@@ -33,7 +33,6 @@ class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<CustomVi
         val thumbnailImageView = holder.view.imageView_album_thumbnail
         Picasso.with(holder.view.context).load(album.cover_medium).into(thumbnailImageView)
 
-        //FADE IN
         val animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         thumbnailImageView.startAnimation(animation)
 
