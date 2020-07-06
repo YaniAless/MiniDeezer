@@ -39,15 +39,28 @@ class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<CustomVi
 
         val channelProfileImageView = holder.view.imageView_artist_profile
         Picasso.with(holder.view.context).load(album.artist.picture).into(channelProfileImageView)
+
+        holder.album = album
     }
 
 }
 
-class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+class CustomViewHolder(val view: View, var album: Data? = null): RecyclerView.ViewHolder(view) {
+
+    companion object {
+        val ALBUM_TITLE = "ALBUM_TITLE"
+        val ALBUM_ID = "VIDEO_TITLE"
+        val ALBUM_COVER = "ALBUM_COVER"
+    }
 
     init {
         view.setOnClickListener {
             val intent = Intent(view.context, AlbumDetailsActivity::class.java)
+
+            intent.putExtra(ALBUM_TITLE, album?.title)
+            intent.putExtra(ALBUM_ID, album?.id)
+            intent.putExtra(ALBUM_COVER, album?.cover_medium)
+
             view.context.startActivity(intent)
         }
     }
