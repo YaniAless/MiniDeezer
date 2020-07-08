@@ -26,6 +26,11 @@
                 android:value=".MainActivity"/>
         </activity>
 
+        <activity android:name=".TrackActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TrackActivity"/>
+        </activity>
+
     </application>
 
 </manifest>

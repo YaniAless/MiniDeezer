@@ -9,4 +9,4 @@ class Data(val id: Int, val title: String, val cover_medium: String, val artist:
 
 class Artist(val name: String, val picture: String)
 
-class AlbumDetails(val id: Int, val title: String, val duration: Int, val track_position: Int, val link: String)
+class AlbumDetails(val id: Int, val title: String, val duration: Int, val track_position: Int, val link: String, val preview: String)

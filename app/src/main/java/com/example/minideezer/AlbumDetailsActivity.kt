@@ -1,5 +1,8 @@
 package com.example.minideezer
 
+import android.content.Intent
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +54,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
                     }
                 }
 
+
             }
 
             override fun onFailure(call: Call?, e: IOException?) {
@@ -59,25 +63,26 @@ class AlbumDetailsActivity : AppCompatActivity() {
         })
     }
 
-    private class AlbumDetailsAdapter(val trackList: TrackList): RecyclerView.Adapter<CourseLessonViewHolder>() {
+    private class AlbumDetailsAdapter(val trackList: TrackList): RecyclerView.Adapter<AlbumDetailsViewHolder>() {
 
         override fun getItemCount(): Int {
             return trackList.data.size
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseLessonViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailsViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val customView = layoutInflater.inflate(R.layout.details_row, parent, false)
 
-            return CourseLessonViewHolder(customView)
+            return AlbumDetailsViewHolder(customView)
         }
 
-        override fun onBindViewHolder(holder: CourseLessonViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: AlbumDetailsViewHolder, position: Int) {
             val albumDetails = trackList.data[position]
 
             holder.customView.textView_music_title?.text = albumDetails.title
 
             holder.customView.textView_duration?.text = convertDuration(albumDetails.duration)
+
 
         }
 
@@ -90,9 +95,28 @@ class AlbumDetailsActivity : AppCompatActivity() {
 
         }
 
+
     }
 
-    private class CourseLessonViewHolder(val customView: View): RecyclerView.ViewHolder(customView) {
+    class AlbumDetailsViewHolder(val customView: View, var albumDetails: AlbumDetails? = null): RecyclerView.ViewHolder(customView) {
+
+        companion object {
+            val SONG_LINK_KEY = "SONG_LINK"
+        }
+
+        init {
+            customView.setOnClickListener {
+
+                var url = "https://cdns-preview-2.dzcdn.net/stream/c-270f059f51b3da69cc45c0a0510f5bba-13.mp3"
+
+                var toto = MediaPlayer()
+
+                toto.setDataSource(url)
+                toto.prepare()
+                toto.start()
+
+            }
+        }
 
     }
 
