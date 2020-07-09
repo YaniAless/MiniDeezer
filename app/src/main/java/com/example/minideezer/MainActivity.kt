@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call?, e: IOException?) {
-                println("Failed to execute request")
+                println("Failed to execute the request")
             }
         })
     }

@@ -1,8 +1,6 @@
 package com.example.minideezer
 
 import android.content.Intent
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,17 +33,14 @@ class AlbumDetailsActivity : AppCompatActivity() {
         val albumId = intent.getIntExtra(CustomViewHolder.ALBUM_ID, -1)
         val albumDetailUrl = "https://api.deezer.com/2.0/album/"+albumId+"/tracks"
 
-
         val client = OkHttpClient()
         val request = Request.Builder().url(albumDetailUrl).build()
         client.newCall(request).enqueue(object: Callback {
             override fun onResponse(call: Call?, response: Response?) {
                 val body = response?.body()?.string()
-
-                println(body)
+                //println(body)
 
                 val gson = GsonBuilder().create()
-
                 val albumList = gson.fromJson(body, TrackList::class.java)
 
                 runOnUiThread {
@@ -54,11 +49,10 @@ class AlbumDetailsActivity : AppCompatActivity() {
                     }
                 }
 
-
             }
 
             override fun onFailure(call: Call?, e: IOException?) {
-
+                println("Failed to execute the request")
             }
         })
     }
@@ -83,42 +77,38 @@ class AlbumDetailsActivity : AppCompatActivity() {
 
             holder.customView.textView_duration?.text = convertDuration(albumDetails.duration)
 
-
+            holder.track = albumDetails
         }
 
         private fun convertDuration(duration: Int): String
         {
-            var minutes = (duration % 3600) / 60;
-            var seconds = duration % 60;
+            val minutes = (duration % 3600) / 60
+            val seconds = duration % 60
 
-            return String.format("%02d:%02d",minutes, seconds);
-
+            return String.format("%02d:%02d",minutes, seconds)
         }
-
 
     }
 
-    class AlbumDetailsViewHolder(val customView: View, var albumDetails: AlbumDetails? = null): RecyclerView.ViewHolder(customView) {
+    class AlbumDetailsViewHolder(val customView: View, var track: Track? = null): RecyclerView.ViewHolder(customView) {
 
         companion object {
             val SONG_LINK_KEY = "SONG_LINK"
+            val SONG_TITLE_KEY = "SONG_TITLE"
+            val ARTIST_NAME_KEY = "ARTIST_NAME"
         }
 
         init {
             customView.setOnClickListener {
 
-                var url = "https://cdns-preview-2.dzcdn.net/stream/c-270f059f51b3da69cc45c0a0510f5bba-13.mp3"
+                val intent = Intent(customView.context, TrackActivity::class.java)
 
-                var toto = MediaPlayer()
+                intent.putExtra(SONG_LINK_KEY, track?.preview)
+                intent.putExtra(SONG_TITLE_KEY, track?.title)
+                intent.putExtra(ARTIST_NAME_KEY, track?.artist?.name)
 
-                toto.setDataSource(url)
-                toto.prepare()
-                toto.start()
-
+                customView.context.startActivity(intent)
             }
         }
-
     }
-
-
 }

@@ -45,7 +45,7 @@ class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<CustomVi
 
 }
 
-class CustomViewHolder(val view: View, var album: Data? = null): RecyclerView.ViewHolder(view) {
+class CustomViewHolder(val view: View, var album: Album? = null): RecyclerView.ViewHolder(view) {
 
     companion object {
         val ALBUM_TITLE = "ALBUM_TITLE"

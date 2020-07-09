@@ -1,29 +1,50 @@
 package com.example.minideezer
 
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.track.*
 
 class TrackActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //TODO : Clean this up
+
         setContentView(R.layout.track)
 
-        val courseLink = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_LINK_KEY)
+        val trackTitleTextView: TextView = findViewById(R.id.track_name)
+        val artistNameTextView: TextView = findViewById(R.id.artist_name)
+        val playPause: Button = findViewById(R.id.play_pause)
 
-        println(courseLink)
+        val trackLink = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_LINK_KEY)
+        val trackTitle = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_TITLE_KEY)
+        val artistName = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.ARTIST_NAME_KEY)
 
-        webview_course_lesson.settings.javaScriptEnabled = true
-        webview_course_lesson.settings.loadWithOverviewMode = true
-        webview_course_lesson.settings.useWideViewPort = true
+        trackTitleTextView.setText(trackTitle)
+        artistNameTextView.setText(artistName)
 
-        webview_course_lesson.loadUrl("https://www.deezer.com/track/313640")
+        val toto = MediaPlayer()
 
+        toto.setDataSource(trackLink)
+        toto.prepare()
+        toto.start()
 
+        playPause.setOnClickListener {
+            if(toto.isPlaying)
+            {
+                toto.pause()
+            }
+            else
+            {
+                toto.start()
+            }
+        }
 
     }
 
+
 }
+
