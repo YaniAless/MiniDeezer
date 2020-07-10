@@ -17,7 +17,9 @@ class TrackActivity: AppCompatActivity() {
 
         val trackTitleTextView: TextView = findViewById(R.id.track_name)
         val artistNameTextView: TextView = findViewById(R.id.artist_name)
-        val playPause: Button = findViewById(R.id.play_pause)
+        var playPause: Button = findViewById(R.id.play_pause)
+        var next :Button = findViewById(R.id.next)
+        var previous: Button = findViewById(R.id.previous)
 
         val trackLink = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_LINK_KEY)
         val trackTitle = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_TITLE_KEY)
@@ -44,7 +46,6 @@ class TrackActivity: AppCompatActivity() {
         }
 
     }
-
 
 }
 
