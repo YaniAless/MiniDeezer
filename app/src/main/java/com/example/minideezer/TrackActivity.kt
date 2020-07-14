@@ -17,7 +17,7 @@ class TrackActivity: AppCompatActivity() {
 
         val trackTitleTextView: TextView = findViewById(R.id.track_name)
         val artistNameTextView: TextView = findViewById(R.id.artist_name)
-        var playPause: Button = findViewById(R.id.play_pause)
+        val playPause: Button = findViewById(R.id.play_pause)
         var next :Button = findViewById(R.id.next)
         var previous: Button = findViewById(R.id.previous)
 
@@ -25,25 +25,42 @@ class TrackActivity: AppCompatActivity() {
         val trackTitle = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_TITLE_KEY)
         val artistName = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.ARTIST_NAME_KEY)
 
-        trackTitleTextView.setText(trackTitle)
-        artistNameTextView.setText(artistName)
+        trackTitleTextView.text = trackTitle
+        artistNameTextView.text = artistName
 
-        val toto = MediaPlayer()
+        checkMediaPlayer()
 
-        toto.setDataSource(trackLink)
-        toto.prepare()
-        toto.start()
+            val mediaPlayer2 = MediaPlayer()
+            mediaPlayer = mediaPlayer2
+            mediaPlayer.setDataSource(trackLink)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+
 
         playPause.setOnClickListener {
-            if(toto.isPlaying)
+            if(mediaPlayer.isPlaying)
             {
-                toto.pause()
+                mediaPlayer.pause()
             }
             else
             {
-                toto.start()
+                mediaPlayer.start()
             }
         }
+
+    }
+
+    private fun checkMediaPlayer()
+    {
+        if(mediaPlayer.isPlaying)
+        {
+            mediaPlayer.release()
+        }
+    }
+
+    companion object {
+
+        var mediaPlayer = MediaPlayer()
 
     }
 

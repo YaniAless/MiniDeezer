@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.minideezer.TrackActivity.Companion.mediaPlayer
 import kotlinx.android.synthetic.main.details_row.view.*
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,11 +22,15 @@ class AlbumDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+        val playPause: Button = findViewById(R.id.play_pause)
+        val musicPlayer: MusicPlayerCustomView = findViewById(R.id.music_player)
 
         recyclerView_main.layoutManager = LinearLayoutManager(this)
 
         val navBarTitle = intent.getStringExtra(CustomViewHolder.ALBUM_TITLE)
         supportActionBar?.title = navBarTitle
+
+        setPlayer(playPause, musicPlayer)
 
         fetchJSON()
     }
@@ -55,6 +61,27 @@ class AlbumDetailsActivity : AppCompatActivity() {
                 println("Failed to execute the request")
             }
         })
+    }
+
+    private fun setPlayer(playPauseButton: Button, musicPlayer: MusicPlayerCustomView)
+    {
+
+        if(mediaPlayer.isPlaying)
+        {
+            playPauseButton.setOnClickListener {
+                if(mediaPlayer.isPlaying)
+                {
+                    mediaPlayer.pause()
+                }
+                else
+                {
+                    mediaPlayer.start()
+                }
+            }
+            musicPlayer.visibility = View.VISIBLE
+        }
+
+
     }
 
     private class AlbumDetailsAdapter(val trackList: TrackList): RecyclerView.Adapter<AlbumDetailsViewHolder>() {
@@ -93,9 +120,9 @@ class AlbumDetailsActivity : AppCompatActivity() {
     class AlbumDetailsViewHolder(val customView: View, var track: Track? = null): RecyclerView.ViewHolder(customView) {
 
         companion object {
-            val SONG_LINK_KEY = "SONG_LINK"
-            val SONG_TITLE_KEY = "SONG_TITLE"
-            val ARTIST_NAME_KEY = "ARTIST_NAME"
+            const val SONG_LINK_KEY = "SONG_LINK"
+            const val SONG_TITLE_KEY = "SONG_TITLE"
+            const val ARTIST_NAME_KEY = "ARTIST_NAME"
         }
 
         init {

@@ -3,7 +3,10 @@ package com.example.minideezer
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.minideezer.TrackActivity.Companion.mediaPlayer
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
@@ -16,10 +19,12 @@ class MainActivity : AppCompatActivity() {
         appContext = applicationContext
         setContentView(R.layout.activity_main)
 
-//      recyclerView_main.setBackgroundColor(Color.BLUE)
+        val playPause: Button = findViewById(R.id.play_pause)
+        val musicPlayer: MusicPlayerCustomView = findViewById(R.id.music_player)
 
         recyclerView_main.layoutManager = LinearLayoutManager(this)
 
+        setPlayer(playPause, musicPlayer)
         fetchJson()
     }
 
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object: Callback {
             override fun onResponse(call: Call?, response: Response?) {
                 val body = response?.body()?.string()
-                println(body)
+                println("ALBUM LIST : $body")
 
                 val gson = GsonBuilder().create()
 
@@ -45,7 +50,6 @@ class MainActivity : AppCompatActivity() {
                     {
                         recyclerView_main.adapter = MainAdapter(homeFeed)
                     }
-
                 }
             }
 
@@ -55,10 +59,30 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun setPlayer(playPauseButton: Button, musicPlayer: MusicPlayerCustomView)
+    {
+        if(mediaPlayer.isPlaying)
+        {
+            playPauseButton.setOnClickListener {
+                if(mediaPlayer.isPlaying)
+                {
+                    mediaPlayer.pause()
+                }
+                else
+                {
+                    mediaPlayer.start()
+                }
+            }
+            musicPlayer.visibility = View.VISIBLE
+        }
+        else if(!mediaPlayer.isPlaying && mediaPlayer.currentPosition > 1)
+        {
+            musicPlayer.visibility = View.VISIBLE
+        }
+    }
+
     companion object {
-
         lateinit  var appContext: Context
-
     }
 }
 

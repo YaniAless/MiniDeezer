@@ -49,7 +49,7 @@ class CustomViewHolder(val view: View, var album: Album? = null): RecyclerView.V
 
     companion object {
         val ALBUM_TITLE = "ALBUM_TITLE"
-        val ALBUM_ID = "VIDEO_TITLE"
+        val ALBUM_ID = "ALBUM_ID"
         val ALBUM_COVER = "ALBUM_COVER"
     }
 
