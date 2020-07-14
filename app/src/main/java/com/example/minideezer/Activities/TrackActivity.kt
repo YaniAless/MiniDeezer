@@ -61,9 +61,7 @@ class TrackActivity: AppCompatActivity() {
     }
 
     companion object {
-
         var mediaPlayer = MediaPlayer()
-
     }
 
 }

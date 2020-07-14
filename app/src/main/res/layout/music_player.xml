@@ -1,43 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/music_player"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_gravity="center"
-    android:orientation="horizontal">
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="@color/colorPrimary">
 
     <Button
         android:id="@+id/previous"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@android:drawable/ic_media_previous"
-        android:layout_marginLeft="45dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:background="@android:drawable/ic_media_previous" />
+
 
     <Button
         android:id="@+id/play_pause"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/play_pause"
-        android:layout_margin="40dp"
-        app:layout_constraintStart_toEndOf="@+id/previous"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/play_pause" />
 
     <Button
         android:id="@+id/next"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_margin="40dp"
-        android:background="@android:drawable/ic_media_next"
-        app:layout_constraintStart_toEndOf="@+id/play_pause"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_gravity="center"
+        android:background="@android:drawable/ic_media_next" />
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
