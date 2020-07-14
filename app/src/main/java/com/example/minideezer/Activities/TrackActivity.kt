@@ -1,10 +1,12 @@
-package com.example.minideezer
+package com.example.minideezer.Activities
 
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.minideezer.R
+import com.example.minideezer.ViewHolders.AlbumDetailsViewHolder
 
 class TrackActivity: AppCompatActivity() {
 
@@ -21,9 +23,9 @@ class TrackActivity: AppCompatActivity() {
         var next :Button = findViewById(R.id.next)
         var previous: Button = findViewById(R.id.previous)
 
-        val trackLink = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_LINK_KEY)
-        val trackTitle = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.SONG_TITLE_KEY)
-        val artistName = intent.getStringExtra(AlbumDetailsActivity.AlbumDetailsViewHolder.ARTIST_NAME_KEY)
+        val trackLink = intent.getStringExtra(AlbumDetailsViewHolder.SONG_LINK_KEY)
+        val trackTitle = intent.getStringExtra(AlbumDetailsViewHolder.SONG_TITLE_KEY)
+        val artistName = intent.getStringExtra(AlbumDetailsViewHolder.ARTIST_NAME_KEY)
 
         trackTitleTextView.text = trackTitle
         artistNameTextView.text = artistName

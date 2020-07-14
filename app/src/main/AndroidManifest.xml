@@ -11,7 +11,7 @@
         android:roundIcon="@drawable/logo_minideezer"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -20,22 +20,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <data android:host="www.mydeeplink.fr" android:pathPrefix="/home" android:scheme="https"/>
+                <data android:host="www.mydeeplink.fr" android:scheme="https"/>
 
             </intent-filter>
         </activity>
 
-        <activity android:name=".AlbumDetailsActivity"
+        <activity android:name=".Activities.AlbumDetailsActivity"
             android:label="Album Details"
             android:launchMode="singleTop">
 
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".Activities.MainActivity"/>
         </activity>
 
-        <activity android:name=".TrackActivity">
+        <activity android:name=".Activities.TrackActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".TrackActivity"/>
+                android:value=".Activities.TrackActivity"/>
         </activity>
 
     </application>

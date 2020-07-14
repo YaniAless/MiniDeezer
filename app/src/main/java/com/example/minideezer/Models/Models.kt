@@ -1,4 +1,4 @@
-package com.example.minideezer
+package com.example.minideezer.Models
 
 
 class HomeFeed(val data: List<Album>)
@@ -9,7 +9,7 @@ class Album(val id: Int, val title: String, val cover_medium: String, val artist
 
 class Artist(val name: String, val picture: String)
 
-class Track(val id: Int, val title: String, val duration: Int, val track_position: Int, val link: String, val preview: String, val artist: TrackArtist)
+class Track(val id: Int, val title: String, val duration: Int, val preview: String, val artist: TrackArtist)
 
 //object Artist in the Tracks API link
 class TrackArtist(val name: String)

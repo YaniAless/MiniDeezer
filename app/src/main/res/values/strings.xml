@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MiniDeezer</string>
+    <string name="app_name">MiniDeezer by YAL</string>
+    <string name="album_list">Vos albums favoris</string>
 </resources>
