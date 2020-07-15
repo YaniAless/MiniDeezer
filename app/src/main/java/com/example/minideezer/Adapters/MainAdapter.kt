@@ -37,13 +37,11 @@ class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<MusicPla
         val thumbnailImageView = holder.view.imageView_album_thumbnail
         Picasso.with(holder.view.context).load(album.cover_medium).into(thumbnailImageView)
 
-        val animation = AnimationUtils.loadAnimation(context,
-            R.anim.fade_in
-        )
+        val animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         thumbnailImageView.startAnimation(animation)
 
-        val channelProfileImageView = holder.view.imageView_artist_profile
-        Picasso.with(holder.view.context).load(album.artist.picture).into(channelProfileImageView)
+        val artistImageView = holder.view.imageView_artist_profile
+        Picasso.with(holder.view.context).load(album.artist.picture).into(artistImageView)
 
         holder.album = album
     }

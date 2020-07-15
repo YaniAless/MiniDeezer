@@ -44,7 +44,7 @@ class AlbumDetailsActivity : AppCompatActivity() {
 
     private fun fetchJSON() {
         val albumId = intent.getIntExtra(MusicPlayerCustomViewHolder.ALBUM_ID, -1)
-        val albumDetailUrl = "https://api.deezer.com/2.0/album/" + albumId + "/tracks"
+        val albumDetailUrl = "https://api.deezer.com/2.0/album/$albumId/tracks"
 
         val client = OkHttpClient()
         val request = Request.Builder().url(albumDetailUrl).build()

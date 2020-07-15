@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             val params: List<String> = intent.data!!.pathSegments
             val albumId: String = params[params.size - 1]
 
-            val albumDetailUrl = "https://api.deezer.com/2.0/album/"+albumId+"/tracks"
+            val albumDetailUrl = "https://api.deezer.com/2.0/album/$albumId/tracks"
 
             val client = OkHttpClient()
             val request = Request.Builder().url(albumDetailUrl).build()
